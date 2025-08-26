@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Undian</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f6f5f3;
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            border: 3px solid #000;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 8px 8px 0px #000;
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #000;
+        }
+
+        .input-file {
+            display: block;
+            margin: 1rem auto;
+            padding: 0.7rem 1rem;
+            border: 3px solid #000;
+            background: #ffdd57;
+            border-radius: 0.5rem;
+            box-shadow: 4px 4px 0px #000;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .button {
+            background: #ff4f6d;
+            color: #fff;
+            border: 3px solid #000;
+            padding: 0.8rem 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 3px solid #000;
+            border-radius: 0.5rem;
+            background: #a0e7e5;
+            box-shadow: 4px 4px 0px #000;
+            font-weight: 600;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Aplikasi Undian</h1>
+        <input type="file" id="fileInput" class="input-file" />
+        <button id="startButton" class="button">Mulai Undian</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
