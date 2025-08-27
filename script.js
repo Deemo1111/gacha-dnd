@@ -4,16 +4,15 @@ let predeterminedWinner2 = null; // Pemenang yang sudah ditentukan 2
 
 document.getElementById('fileInput').addEventListener('change', handleFile);
 document.getElementById('startButton').addEventListener('click', startDraw);
+
+// Menambahkan event listener untuk teks "Aplikasi Undian"
 document.querySelector('h1').addEventListener('click', () => {
-    // Memunculkan keyboard saat judul diklik
-    const input = document.createElement('input');
-    input.style.position = 'absolute';
-    input.style.opacity = '0';
-    document.body.appendChild(input);
-    input.focus();
-    input.addEventListener('blur', () => {
-        document.body.removeChild(input);
-    });
+    setWinner1(); // Memicu pemenang yang sudah ditentukan 1
+});
+
+// Menambahkan event listener untuk logo
+document.querySelector('.logo').addEventListener('click', () => {
+    setWinner2(); // Memicu pemenang yang sudah ditentukan 2
 });
 
 function handleFile(event) {
