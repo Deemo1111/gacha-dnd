@@ -1,69 +1,66 @@
-/* style.css */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap');
-
 body {
-  background: #f6f5f3;
-  font-family: 'Space Grotesk', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 10px; /* Tambahkan padding untuk perangkat mobile */
+    box-sizing: border-box; /* Pastikan padding tidak mempengaruhi ukuran */
 }
 
 .container {
-  background: #ffffff;
-  border: 3px solid #000;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 8px 8px 0px #000;
-  text-align: center;
-  width: 350px;
+    background-color: #ffffff;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%; /* Memastikan lebar 100% untuk perangkat mobile */
+    max-width: 400px; /* Maksimal lebar untuk tampilan desktop */
 }
 
 h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #000;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ff5722; /* Warna cerah untuk judul */
+    cursor: pointer; /* Menunjukkan bahwa teks dapat ditekan */
 }
 
 .input-file {
-  display: block;
-  margin: 1rem auto;
-  padding: 0.7rem 1rem;
-  border: 3px solid #000;
-  background: #ffdd57;
-  border-radius: 0.5rem;
-  box-shadow: 4px 4px 0px #000;
-  cursor: pointer;
-  font-weight: 600;
+    margin: 20px 0;
+    padding: 10px;
+    border: 2px solid #ff5722; /* Warna cerah untuk border */
+    border-radius: 4px;
+    font-size: 1em;
+    width: 100%;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .button {
-  background: #ff4f6d;
-  color: #fff;
-  border: 3px solid #000;
-  padding: 0.8rem 1.5rem;
-  margin-top: 1rem;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 4px 4px 0px #000;
-  transition: transform 0.1s ease-in-out;
+    background-color: #ff5722; /* Warna cerah untuk tombol */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
 }
 
 .button:hover {
-  transform: translateY(-3px);
+    background-color: #e64a19; /* Warna lebih gelap saat hover */
 }
 
 .result {
-  margin-top: 2rem;
-  padding: 1rem;
-  border: 3px solid #000;
-  border-radius: 0.5rem;
-  background: #a0e7e5;
-  box-shadow: 4px 4px 0px #000;
-  font-weight: 600;
-  color: #000;
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #333;
+    border: 2px solid #333;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
 }

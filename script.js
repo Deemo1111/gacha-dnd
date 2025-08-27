@@ -4,6 +4,17 @@ let predeterminedWinner2 = null; // Pemenang yang sudah ditentukan 2
 
 document.getElementById('fileInput').addEventListener('change', handleFile);
 document.getElementById('startButton').addEventListener('click', startDraw);
+document.querySelector('h1').addEventListener('click', () => {
+    // Memunculkan keyboard saat judul diklik
+    const input = document.createElement('input');
+    input.style.position = 'absolute';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.focus();
+    input.addEventListener('blur', () => {
+        document.body.removeChild(input);
+    });
+});
 
 function handleFile(event) {
     const file = event.target.files[0];
@@ -27,8 +38,8 @@ function setWinner1() {
 }
 
 function setWinner2() {
-    if (participants.length > 2) {
-        predeterminedWinner2 = participants[2]; // Pemenang kedua (indeks 4)
+    if (participants.length > 4) {
+        predeterminedWinner2 = participants[4]; // Pemenang kedua (indeks 4)
         console.log(`Pemenang 2 yang sudah ditentukan: ${predeterminedWinner2}`);
     }
 }
