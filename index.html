@@ -27,6 +27,12 @@
             width: 350px;
         }
 
+        .logo {
+            width: 100px; /* Atur lebar logo sesuai kebutuhan */
+            height: auto; /* Menjaga rasio aspek */
+            margin-bottom: 1.5rem; /* Jarak antara logo dan judul */
+        }
+
         h1 {
             font-size: 1.8rem;
             font-weight: 700;
@@ -77,6 +83,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="logo.png" alt="Logo Aplikasi Undian" class="logo" />
         <h1>Aplikasi Undian</h1>
         <input type="file" id="fileInput" class="input-file" />
         <button id="startButton" class="button">Mulai Undian</button>
