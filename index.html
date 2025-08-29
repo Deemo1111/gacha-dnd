@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi Undian</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script> <!-- Tambahkan Anime.js -->
 
     <style>
         body {
@@ -24,7 +25,7 @@
             border-radius: 1rem;
             box-shadow: 8px 8px 0px #000;
             text-align: center;
-            width: 350px;
+            width: 400px;
         }
 
         .logo {
@@ -79,6 +80,28 @@
             font-weight: 600;
             color: #000;
         }
+
+        /* Gaya untuk nama peserta */
+        .name-display {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    transition: opacity 0.5s, transform 0.5s;
+    margin: 1.5rem 0 0 0; /* Tambahkan margin-top lebih besar */
+	margin-top: 1.5rem; /* Tambahkan jarak dari tombol */
+    padding: 0.5rem;
+    border: 3px solid #000;
+    border-radius: 0.5rem;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+        /* Efek animasi untuk nama */
+        .name-display.animate {
+            transform: scale(1.1); /* Efek zoom */
+            opacity: 0.8; /* Efek transparansi */
+        }
     </style>
 </head>
 <body>
@@ -87,6 +110,10 @@
         <h1>Aplikasi Undian</h1>
         <input type="file" id="fileInput" class="input-file" />
         <button id="startButton" class="button">Mulai Undian</button>
+
+		<!-- Elemen untuk menampilkan nama peserta -->
+        <div class="name-display" id="nameDisplay">Nama Peserta</div>
+		
         <div id="result" class="result"></div>
     </div>
 
