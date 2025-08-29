@@ -7,7 +7,7 @@ document.getElementById('fileInput').addEventListener('change', handleFile);
 document.getElementById('startButton').addEventListener('click', startDraw);
 
 document.querySelector('h1').addEventListener('click', () => {
-    setWinnerByIndex(0); // Trigger pemenang 1
+    setWinnerByIndex(1); // Trigger pemenang 1
 });
 
 document.querySelector('.logo').addEventListener('click', () => {
