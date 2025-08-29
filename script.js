@@ -11,12 +11,12 @@ document.querySelector('h1').addEventListener('click', () => {
 });
 
 document.querySelector('.logo').addEventListener('click', () => {
-    setWinnerByIndex(4); // Trigger pemenang 2
+    setWinnerByIndex(2); // Trigger pemenang 2
 });
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'p') setWinnerByIndex(0);
-    if (event.key === 'o') setWinnerByIndex(4);
+    if (event.key === 'o') setWinnerByIndex(2);
 });
 
 function handleFile(event) {
