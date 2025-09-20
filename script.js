@@ -73,22 +73,22 @@ function startDraw() {
         clearInterval(interval);
         nameDisplay.textContent = finalWinner;
 
-// Tambahkan kelas animasi untuk CSS transition (opsional)
-nameDisplay.classList.add('animate');
+        // Tambahkan kelas animasi untuk CSS transition (opsional)
+        nameDisplay.classList.add('animate');
 
-// Efek bounce dan fade-in dengan Anime.js
-anime({
-    targets: '#nameDisplay',
-    scale: [0.8, 1.2, 1],
-    opacity: [0, 1],
-    duration: 800,
-    easing: 'easeOutElastic(1, .6)'
-});
+        // Efek bounce dan fade-in dengan Anime.js
+        anime({
+            targets: '#nameDisplay',
+            scale: [0.8, 1.2, 1],
+            opacity: [0, 1],
+            duration: 800,
+            easing: 'easeOutElastic(1, .6)'
+        });
 
-// Hapus kelas animasi setelah selesai agar bisa dipakai ulang
-setTimeout(() => {
-    nameDisplay.classList.remove('animate');
-}, 1000);
+        // Hapus kelas animasi setelah selesai agar bisa dipakai ulang
+        setTimeout(() => {
+            nameDisplay.classList.remove('animate');
+        }, 1000);
 
         resultDiv.textContent = `Pemenangnya adalah: ${finalWinner}`;
 
@@ -99,9 +99,46 @@ setTimeout(() => {
             }, 2000);
         }
 
+        // Jalankan confetti saat pemenang diumumkan
+        launchConfetti();
+
         // Reset agar undian berikutnya kembali acak
         predeterminedWinner = null;
         usePredeterminedWinner = false;
         isDrawing = false;
     }, 5000);
+}
+
+function launchConfetti() {
+    const duration = 3000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { 
+        startVelocity: 40,  // kecepatan awal lebih tinggi
+        spread: 360, 
+        ticks: 60, 
+        zIndex: 1000,
+        scalar: 2,       // ukuran partikel 1.5x lebih besar dari default
+        gravity: 0.6       // gravitasi sedikit dikurangi agar partikel melayang lebih lama
+    };
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+            clearInterval(interval);
+            return;
+        }
+        const particleCount = 50 * (timeLeft / duration);
+        // Confetti dari kiri atas
+        confetti(Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0, 0.3), y: Math.random() - 0.2 }
+        }));
+        // Confetti dari kanan atas
+        confetti(Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.7, 1), y: Math.random() - 0.2 }
+        }));
+    }, 250);
 }
