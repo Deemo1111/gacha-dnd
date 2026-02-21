@@ -1,22 +1,49 @@
-let participants = [];
-let predeterminedWinner = null;
-let usePredeterminedWinner = false;
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  
+    if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+        document.body.classList.add('dark-mode');
+    }
+}
+
+function switchTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        document.body.classList.add('dark-mode');
+    }
+    else {        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        document.body.classList.remove('dark-mode');
+    }    
+}
+
+toggleSwitch.addEventListener('change', switchTheme, false);
+
+let questions = [];
+let originalQuestions = [];
+let predeterminedQuestion = null;
+let usePredeterminedQuestion = false;
 let isDrawing = false;
 
 document.getElementById('fileInput').addEventListener('change', handleFile);
 document.getElementById('startButton').addEventListener('click', startDraw);
 
 document.querySelector('h1').addEventListener('click', () => {
-    setWinnerByIndex(1); // Trigger pemenang 1
+    setQuestionByIndex(1); // Trigger pemenang 1
 });
 
 document.querySelector('.logo').addEventListener('click', () => {
-    setWinnerByIndex(2); // Trigger pemenang 2
+    setQuestionByIndex(2); // Trigger pemenang 2
 });
 
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'p') setWinnerByIndex(0);
-    if (event.key === 'o') setWinnerByIndex(2);
+    if (event.key === 'p') setQuestionByIndex(0);
+    if (event.key === 'o') setQuestionByIndex(2);
 });
 
 function handleFile(event) {
@@ -27,51 +54,66 @@ function handleFile(event) {
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
         const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-        participants = XLSX.utils.sheet_to_json(firstSheet, { header: 1 }).flat().filter(name => name);
-        displayParticipantsInNameDisplay();
+        originalQuestions = XLSX.utils.sheet_to_json(firstSheet, { header: 1 }).flat().filter(name => name);
+        questions = [...originalQuestions];
+        displayQuestionsInNameDisplay();
     };
 
     reader.readAsArrayBuffer(file);
 }
 
-function displayParticipantsInNameDisplay() {
+function displayQuestionsInNameDisplay() {
     const nameDisplay = document.getElementById('nameDisplay');
-    nameDisplay.textContent = participants.length > 0 ? participants[0] : "Unggah file Excel untuk memulai.";
-}
-
-function setWinnerByIndex(index) {
-    if (participants.length > index) {
-        predeterminedWinner = participants[index];
-        usePredeterminedWinner = true;
-        console.log(`Pemenang ditentukan: ${predeterminedWinner}`);
+    if (questions.length > 0) {
+        nameDisplay.textContent = "Siap untuk mengundi pertanyaan berikutnya.";
+    } else if (originalQuestions.length > 0 && questions.length === 0) {
+        nameDisplay.textContent = "Semua pertanyaan telah diundi! Tekan reset untuk memulai lagi.";
+    } else {
+        nameDisplay.textContent = "Unggah file Excel berisi pertanyaan untuk memulai.";
     }
 }
 
+function setQuestionByIndex(index) {
+    if (questions.length > index) {
+        predeterminedQuestion = questions[index];
+        usePredeterminedQuestion = true;
+        console.log(`Pertanyaan ditentukan: ${predeterminedQuestion}`);
+    }
+}
+
+function resetDraw() {
+    questions = [...originalQuestions];
+    displayQuestionsInNameDisplay();
+    console.log("Daftar pertanyaan telah direset.");
+}
+
+document.getElementById('resetButton').addEventListener('click', resetDraw);
+
 function startDraw() {
-    if (isDrawing || participants.length === 0) return;
+    if (isDrawing || questions.length === 0) return;
 
     isDrawing = true;
-    const resultDiv = document.getElementById('result');
     const nameDisplay = document.getElementById('nameDisplay');
     const winnerIndicator = document.getElementById('winnerIndicator');
 
-    resultDiv.textContent = '';
+    const questionIndex = usePredeterminedQuestion
+        ? questions.indexOf(predeterminedQuestion)
+        : Math.floor(Math.random() * questions.length);
 
-    const winnerIndex = usePredeterminedWinner
-        ? participants.indexOf(predeterminedWinner)
-        : Math.floor(Math.random() * participants.length);
-
-    const finalWinner = participants[winnerIndex];
+    const finalQuestion = questions[questionIndex];
 
     let currentIndex = 0;
     const interval = setInterval(() => {
-        nameDisplay.textContent = participants[currentIndex];
-        currentIndex = (currentIndex + 1) % participants.length;
+        nameDisplay.textContent = questions[currentIndex];
+        currentIndex = (currentIndex + 1) % questions.length;
     }, 200);
 
     setTimeout(() => {
         clearInterval(interval);
-        nameDisplay.textContent = finalWinner;
+        nameDisplay.textContent = `"${finalQuestion}"`;
+
+        // Hapus pertanyaan yang sudah terpilih
+        questions.splice(questionIndex, 1);
 
         // Tambahkan kelas animasi untuk CSS transition (opsional)
         nameDisplay.classList.add('animate');
@@ -90,8 +132,6 @@ function startDraw() {
             nameDisplay.classList.remove('animate');
         }, 1000);
 
-        resultDiv.textContent = `Pemenangnya adalah: ${finalWinner}`;
-
         if (winnerIndicator) {
             winnerIndicator.style.opacity = 1;
             setTimeout(() => {
@@ -103,8 +143,8 @@ function startDraw() {
         launchConfetti();
 
         // Reset agar undian berikutnya kembali acak
-        predeterminedWinner = null;
-        usePredeterminedWinner = false;
+        predeterminedQuestion = null;
+        usePredeterminedQuestion = false;
         isDrawing = false;
     }, 5000);
 }
