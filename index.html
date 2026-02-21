@@ -203,9 +203,99 @@
             color: #fff;
             border-color: #fff;
         }
+
+        /* Help Link & Modal */
+        #help-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.visible {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px 40px;
+            border: 3px solid #000;
+            border-radius: 1rem;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 8px 8px 0px #000;
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+        }
+        
+        .guide-section {
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+        .guide-section h3 {
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.5rem;
+        }
+        .guide-section ol, .guide-section ul {
+            padding-left: 20px;
+        }
+
+        body.dark-mode #help-link {
+            color: #fff;
+        }
+
+        body.dark-mode .modal-content {
+            background: #2c2c2c;
+            border-color: #fff;
+            box-shadow: 8px 8px 0px #fff;
+            color: #fff;
+        }
+        body.dark-mode .guide-section h3 {
+            border-color: #fff;
+        }
+        body.dark-mode .close-button {
+            color: #ccc;
+        }
+        body.dark-mode .close-button:hover,
+        body.dark-mode .close-button:focus {
+            color: #fff;
+        }
+
     </style>
 </head>
 <body>
+    <a href="#" id="help-link">Panduan Menggunakan</a>
     <div class="theme-switch-wrapper">
         <label class="theme-switch" for="checkbox">
             <input type="checkbox" id="checkbox" />
@@ -223,6 +313,33 @@
 
 		<!-- Elemen untuk menampilkan nama peserta -->
         <div class="name-display" id="nameDisplay">Kartu Pertanyaan</div>
+    </div>
+
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Panduan Penggunaan</h2>
+            <div class="guide-section">
+                <h3>Cara Menggunakan Aplikasi</h3>
+                <ol>
+                    <li>Klik tombol "Choose File" untuk mengunggah file Excel Anda.</li>
+                    <li>Klik "Mulai Undian" untuk memulai pengundian acak.</li>
+                    <li>Pertanyaan yang terpilih akan ditampilkan di kartu.</li>
+                    <li>Pertanyaan yang sudah diundi tidak akan muncul lagi di sesi yang sama.</li>
+                    <li>Klik "Reset" untuk mengembalikan semua pertanyaan ke dalam daftar undian.</li>
+                    <li>Gunakan tombol di pojok kanan atas untuk beralih mode terang/gelap.</li>
+                </ol>
+            </div>
+            <div class="guide-section">
+                <h3>Panduan Mengisi File Excel</h3>
+                <ul>
+                    <li>Pastikan format file adalah <strong>.xlsx</strong>.</li>
+                    <li>Isi semua pertanyaan Anda di <strong>kolom pertama (Kolom A)</strong>.</li>
+                    <li>Setiap baris dihitung sebagai satu pertanyaan.</li>
+                    <li>Aplikasi hanya akan membaca <em>sheet</em> pertama dari file Excel Anda.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>

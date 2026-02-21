@@ -24,6 +24,26 @@ function switchTheme(e) {
 
 toggleSwitch.addEventListener('change', switchTheme, false);
 
+// Modal Logic
+const modal = document.getElementById('help-modal');
+const helpLink = document.getElementById('help-link');
+const closeButton = document.querySelector('.close-button');
+
+helpLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.classList.add('visible');
+});
+
+closeButton.addEventListener('click', () => {
+    modal.classList.remove('visible');
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target == modal) {
+        modal.classList.remove('visible');
+    }
+});
+
 let questions = [];
 let originalQuestions = [];
 let predeterminedQuestion = null;
