@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undian Kartu Pertanyaan</title>
+    <title>Obrolan D&D Kediri</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script> <!-- Tambahkan Anime.js -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -292,6 +292,19 @@
             color: #fff;
         }
 
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: #888;
+            z-index: 1000;
+        }
+
+        body.dark-mode .watermark {
+            color: #ccc;
+        }
+
     </style>
 </head>
 <body>
@@ -304,7 +317,7 @@
     </div>
     <div class="container">
         <img src="logo.png" alt="Logo Aplikasi" class="logo" />
-        <h1>Undian Kartu Pertanyaan</h1>
+        <h1>Obrolan D&D Kediri</h1>
         <input type="file" id="fileInput" class="input-file" />
         <div class="button-container">
             <button id="startButton" class="button">Mulai Undian</button>
@@ -345,5 +358,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="script.js"></script>
+    <div class="watermark">
+      crafted with &#x2764; by Froggo🐸
+    </div>
 </body>
 </html>
